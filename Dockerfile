@@ -32,6 +32,8 @@ COPY ./php.ini /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/
 
 COPY ./entrypoint.sh /
 
+RUN chmod +x /entrypoint.sh
+
 VOLUME ["/usr/local/lsws/wordpress"]
 
 EXPOSE 80

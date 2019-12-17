@@ -100,6 +100,40 @@ function setup_wordpress
     set_config 'WORDPRESS_TABLE_PREFIX' "$WORDPRESS_TABLE_PREFIX"
     set_config 'WORDPRESS_DEBUG' "$WORDPRESS_DEBUG"
     
+    sed -e '5,10d;12d' "$WORDPRESSPATH/wp-config.php"
+
+    if [ ! -e .htaccess ]; then
+        cat > "$WORDPRESSPATH/.htaccess" <<-'EOF'
+            # BEGIN WordPress
+            <IfModule mod_rewrite.c>
+            RewriteEngine On
+            RewriteBase /
+            RewriteRule ^index\.php$ - [L]
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteRule . /index.php [L]
+            </IfModule>
+            # END WordPress
+EOF
+
+        chown  -R --reference="$WORDPRESSPATH/wp-config-sample.php" "$WORDPRESSPATH/.htaccess"
+    fi
+
+    if ! grep -c -q "'WP_HOME'" ${WORDPRESSPATH}/wp-config.php ; then
+       echo "define( 'WP_HOME', '${PROTOCOL}${SITE_URL}${SITE_PORT}' );" >> ${WORDPRESSPATH}/wp-config.php
+    fi
+
+    if ! grep -c -q "'WP_SITEURL'" ${WORDPRESSPATH}/wp-config.php ; then
+        echo "define( 'WP_SITEURL', '${PROTOCOL}${SITE_URL}${SITE_PORT}' );" >> ${WORDPRESSPATH}/wp-config.php
+    fi
+
+   OLDURL=`grep "WP_HOME" ${WORDPRESSPATH}/wp-config.php | cut -d \' -f 4`
+   if [ "$OLDURL" != "${PROTOCOL}${SITE_URL}${SITE_PORT}" ]; then
+       echo "** [wordpress] Modifying wordpress to serve from ${OLDURL} to ${PROTOCOL}${SITE_URL}${SITE_PORT} - Please wait"
+       sed -i "s#define( 'WP_HOME'.*#define( 'WP_HOME', '${PROTOCOL}${SITE_URL}${SITE_PORT}' );#g" ${WORDPRESSPATH}/wp-config.php
+       sed -i "s#define( 'WP_SITEURL'.*#define( 'WP_SITEURL', '${PROTOCOL}${SITE_URL}${SITE_PORT}' );#g" ${WORDPRESSPATH}/wp-config.php
+   fi 
+
 }
 
 
@@ -177,13 +211,13 @@ virtualhost wordpress {
 listener wordpress {
   address                 *:$WPPORT
   secure                  0
-  map                     wordpress $SITEDOMAIN
+  map                     wordpress $SITE_URL
 }
 
 listener wordpressssl {
   address                 *:$SSLWPPORT
   secure                  1
-  map                     wordpress $SITEDOMAIN
+  map                     wordpress $SITE_URL
   keyFile                 $SERVER_ROOT/conf/$KEY
   certFile                $SERVER_ROOT/conf/$CERT
 }

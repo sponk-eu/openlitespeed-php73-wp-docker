@@ -67,7 +67,9 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     PHP_MAX_EXECUTION_TIME="1800" \
     PHP_POST_MAX_SIZE="2048M" \
     PHP_UPLOAD_MAX_FILESIZE="2048M" \
-    SITEDOMAIN="*" \
+    SITE_URL="localhost" \
+    SITE_PORT="443" \
+    PROTOCOL="https" \
     WPPORT="80" \
     SSLWPPORT="443"
 

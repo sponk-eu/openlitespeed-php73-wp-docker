@@ -122,20 +122,16 @@ EOF
     NEWURL="'$PROTOCOL://' . \$_SERVER['HTTP_HOST'] . '/'"
 
     if ! grep -c -q "'WP_HOME'" ${WORDPRESSPATH}/wp-config.php ; then
-       echo "define( 'WP_HOME', '${NEWURL}' );" >> ${WORDPRESSPATH}/wp-config.php
+       echo "define( 'WP_HOME', ${NEWURL} );" >> ${WORDPRESSPATH}/wp-config.php
     fi
 
     if ! grep -c -q "'WP_SITEURL'" ${WORDPRESSPATH}/wp-config.php ; then
-        echo "define( 'WP_SITEURL', '${NEWURL}' );" >> ${WORDPRESSPATH}/wp-config.php
+        echo "define( 'WP_SITEURL', ${NEWURL} );" >> ${WORDPRESSPATH}/wp-config.php
     fi
 
 
-    OLDURL=`grep "WP_HOME" ${WORDPRESSPATH}/wp-config.php | cut -d \' -f 4`
-    if [ "$OLDURL" != "$NEWURL" ]; then
-        echo "** [wordpress] Modifying wordpress to serve from ${OLDURL} to ${NEWURL} - Please wait"
-        sed -i "s#define( 'WP_HOME'.*#define( 'WP_HOME', '${NEWURL}' );#g" ${WORDPRESSPATH}/wp-config.php
-        sed -i "s#define( 'WP_SITEURL'.*#define( 'WP_SITEURL', '${NEWURL}' );#g" ${WORDPRESSPATH}/wp-config.php
-    fi 
+    sed -i "s#define( 'WP_HOME'.*#define( 'WP_HOME', ${NEWURL} );#g" ${WORDPRESSPATH}/wp-config.php
+    sed -i "s#define( 'WP_SITEURL'.*#define( 'WP_SITEURL', ${NEWURL} );#g" ${WORDPRESSPATH}/wp-config.php
 
 }
 

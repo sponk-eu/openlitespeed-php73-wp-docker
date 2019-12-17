@@ -74,7 +74,7 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     OLS_DEBUG_LEVEL="0"
 
 ENTRYPOINT ["/entrypoint.sh"]
-
+CMD ["tail -f /dev/null"]
 
 # [supervisord]
 # nodaemon=true

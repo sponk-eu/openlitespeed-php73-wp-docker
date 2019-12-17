@@ -24,12 +24,18 @@ RUN chown -R --reference=./autoupdate ./wordpress
 # 
 RUN rm -rf /usr/local/lsws/conf/httpd_config.conf /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini /var/lib/apt/lists/* ./enable_lst_debain_repo.sh /usr/local/lsws/conf/vhosts/Example && apt-get remove --purge -y wget
 
-RUN touch /usr/local/lsws/logs/error.log
-RUN ls -sf /proc/1/fd/1 /usr/local/lsws/logs/error.log
+RUN touch /usr/local/lsws/logs/error.log \
+    && touch /usr/local/lsws/logs/access.log \
+    && ln -sf /dev/stdout /usr/local/lsws/logs/access.log \
+    && ln -sf /dev/stderr /usr/local/lsws/logs/error.log \
+    && $SERVER_ROOT/fcgi-bin/lsphp7 \
+    && ln -sf /usr/local/lsws/lsphp73/bin/lsphp /usr/local/lsws/fcgi-bin/lsphp \
+    && ln -sf /usr/local/lsws/lsphp73/bin/lsphp /usr/local/lsws/fcgi-bin/lsphp7
+
+
 
 COPY ./httpd_config.conf /usr/local/lsws/conf/
 COPY ./php.ini /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/
-
 COPY ./entrypoint.sh /
 
 RUN chmod +x /entrypoint.sh

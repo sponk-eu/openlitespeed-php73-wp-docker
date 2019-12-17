@@ -101,8 +101,8 @@ function setup_wordpress
     set_config 'DB_NAME' "$DB_NAME"
     set_config 'WORDPRESS_TABLE_PREFIX' "$WORDPRESS_TABLE_PREFIX"
     set_config 'WORDPRESS_DEBUG' "$WORDPRESS_DEBUG"
-    
-    sed -e '5,10d;12d' "$WORDPRESSPATH/wp-config.php"
+
+    # sed -e '5,10d;12d' "$WORDPRESSPATH/wp-config.php"
 
     if [ ! -e .htaccess ]; then
         cat > "$WORDPRESSPATH/.htaccess" <<-'EOF'
@@ -132,6 +132,7 @@ EOF
     fi
 
 
+    sed -i "s#\$table_prefix.*#\$table_prefix='${WORDPRESS_TABLE_PREFIX}';#g" ${WORDPRESSPATH}/wp-config.php
     sed -i "s#define( 'WP_HOME'.*#define( 'WP_HOME', ${NEWURL} );#g" ${WORDPRESSPATH}/wp-config.php
     sed -i "s#define( 'WP_SITEURL'.*#define( 'WP_SITEURL', ${NEWURL} );#g" ${WORDPRESSPATH}/wp-config.php
 
@@ -210,6 +211,8 @@ virtualhost wordpress {
   enableScript            1
   restrained              0
   setUIDMode              2
+  user                    www-data
+  group                   www-data
 }
 
 listener wordpress {

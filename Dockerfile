@@ -28,7 +28,6 @@ RUN touch /usr/local/lsws/logs/error.log \
     && touch /usr/local/lsws/logs/access.log \
     && ln -sf /dev/stdout /usr/local/lsws/logs/access.log \
     && ln -sf /dev/stderr /usr/local/lsws/logs/error.log \
-    && $SERVER_ROOT/fcgi-bin/lsphp7 \
     && ln -sf /usr/local/lsws/lsphp73/bin/lsphp /usr/local/lsws/fcgi-bin/lsphp \
     && ln -sf /usr/local/lsws/lsphp73/bin/lsphp /usr/local/lsws/fcgi-bin/lsphp7
 

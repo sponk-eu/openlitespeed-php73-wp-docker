@@ -45,6 +45,7 @@ EXPOSE 80
 EXPOSE 443
 EXPOSE 443/udp
 EXPOSE 7080
+EXPOSE 7080/udp
 
 ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     DB_NAME='wordpress' \

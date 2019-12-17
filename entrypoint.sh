@@ -1,7 +1,6 @@
 #!/bin/bash
 
-set -x
-RUN_COMMAND="$0"
+RUN_COMMAND="$@"
 
 SERVER_ROOT=/usr/local/lsws
 WORDPRESSPATH=$SERVER_ROOT/wordpress
@@ -294,4 +293,4 @@ echo "Starting openlitespeed..."
 
 echo "Tailling. ..."
 
-RUN_COMMAND
+$RUN_COMMAND

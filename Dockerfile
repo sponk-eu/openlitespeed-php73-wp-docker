@@ -70,7 +70,8 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     DOMAIN_URL="*" \
     PROTOCOL="https" \
     WPPORT="80" \
-    SSLWPPORT="443"
+    SSLWPPORT="443" \
+    OLS_DEBUG_LEVEL="0"
 
 ENTRYPOINT ["/entrypoint.sh"]
 

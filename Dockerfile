@@ -19,7 +19,7 @@ RUN wget --no-check-certificate http://wordpress.org/latest.tar.gz
 RUN tar -xzvf latest.tar.gz  >/dev/null 2>&1
 RUN rm latest.tar.gz
 RUN wget -q -r --level=0 -nH --cut-dirs=2 --no-parent https://plugins.svn.wordpress.org/litespeed-cache/trunk/ --reject html -P ./wordpress/wp-content/plugins/litespeed-cache/
-RUN chown -R www-data:www-data ./wordpress
+RUN chown -R --reference=./autoupdate ./wordpress
 
 # 
 RUN rm -rf /usr/local/lsws/conf/httpd_config.conf /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini /var/lib/apt/lists/* ./enable_lst_debain_repo.sh /usr/local/lsws/conf/vhosts/Example && apt-get remove --purge -y wget

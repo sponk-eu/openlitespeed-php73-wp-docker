@@ -211,8 +211,6 @@ virtualhost wordpress {
   enableScript            1
   restrained              0
   setUIDMode              2
-  user                    www-data
-  group                   www-data
 }
 
 listener wordpress {

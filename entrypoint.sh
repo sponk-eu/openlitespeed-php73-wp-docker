@@ -214,13 +214,13 @@ virtualhost wordpress {
 listener wordpress {
   address                 *:$WPPORT
   secure                  0
-  map                     wordpress $SITE_URL
+  map                     wordpress $DOMAIN_URL
 }
 
 listener wordpressssl {
   address                 *:$SSLWPPORT
   secure                  1
-  map                     wordpress $SITE_URL
+  map                     wordpress $DOMAIN_URL
   keyFile                 $SERVER_ROOT/conf/$KEY
   certFile                $SERVER_ROOT/conf/$CERT
 }

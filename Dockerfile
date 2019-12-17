@@ -72,7 +72,9 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     PROTOCOL="https" \
     WPPORT="80" \
     SSLWPPORT="443" \
-    OLS_DEBUG_LEVEL="0"
+    OLS_DEBUG_LEVEL="0" \
+    OLS_MAX_REQ_BODY_SIZE="2047M" \
+    OLS_MAX_DYN_RESP_SIZE="2047M"
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["tail -f /dev/null"]

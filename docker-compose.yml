@@ -1,11 +1,42 @@
-version: '3.3'
-
+version: '2'
 services:
-  web:
-    restart: always
-    ports:
-      - '8088:80'
-      - '7080:7080'
-    build: .
+  openlitespeed2:
+    image: sponk/openlitespeed-php73-wp-docker:latest
+    environment:
+      DB_HOST: mysql
+      DB_NAME: database
+      DB_PASSWORD: passworddb
+      DB_USERNAME: user
+      SSL_HOSTNAME: localhost
+      PHP_POST_MAX_SIZE: 3098M
+      PHP_UPLOAD_MAX_FILESIZE: 3098M
+      SITE_URL: localhost
+      WPPORT: '5080'
+      SSLWPPORT: '5443'
+      SITE_PORT: :5443
+      PROTOCOL: https
+      OLS_DEBUG_LEVEL: '10'
+    stdin_open: true
     volumes:
-      - ${PWD}/html:/usr/local/lsws/Example/html
+    - olws_wordpress:/usr/local/lsws/wordpress
+    tty: true
+    links:
+    - mysql:mysql
+    ports:
+    - 5443:5443/udp
+    - 5443:5443/tcp
+    - 7080:7080/tcp
+    - 7080:7080/udp
+    labels:
+      io.rancher.container.pull_image: always
+  mysql:
+    image: mysql:5.7.26
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_PASSWORD: passworddb
+      MYSQL_ROOT_PASSWORD: rootdb
+      MYSQL_USER: user
+    stdin_open: true
+    tty: true
+    labels:
+      io.rancher.container.pull_image: always

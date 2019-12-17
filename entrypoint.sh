@@ -196,6 +196,8 @@ function config_server_wp
         if [ $? != 0 ] ; then
             sed -i -e "s/adminEmails/adminEmails $SERVER_EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/debugLevel/debugLevel $OLS_DEBUG_LEVEL\n#debugLevel/" "$SERVER_ROOT/conf/httpd_config.conf"
+            sed -i -e "s/maxReqBodySize/maxReqBodySize $OLS_MAX_REQ_BODY_SIZE\n#maxReqBodySize/" "$SERVER_ROOT/conf/httpd_config.conf"
+            sed -i -e "s/maxDynRespSize/maxDynRespSize $OLS_MAX_DYN_RESP_SIZE\n#maxDynRespSize/" "$SERVER_ROOT/conf/httpd_config.conf"
 
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/wordpress/vhconf.conf
 

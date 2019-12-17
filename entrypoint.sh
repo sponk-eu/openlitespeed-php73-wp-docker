@@ -2,14 +2,10 @@
 
 SERVER_ROOT=/usr/local/lsws
 WORDPRESSPATH=$SERVER_ROOT/wordpress
-WPPORT=80
-SSLWPPORT=443
 
 CSR=example.csr
 KEY=example.key
 CERT=example.crt
-
-SITEDOMAIN=*
 
 PHPINFOPATH=/usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini
 

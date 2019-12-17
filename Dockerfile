@@ -61,7 +61,10 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     PHP_MEMORY_LIMIT="512M" \
     PHP_MAX_EXECUTION_TIME="1800" \
     PHP_POST_MAX_SIZE="2048M" \
-    PHP_UPLOAD_MAX_FILESIZE="2048M"
+    PHP_UPLOAD_MAX_FILESIZE="2048M" \
+    SITEDOMAIN="*" \
+    WPPORT="80" \
+    SSLWPPORT="443" \
 
 ENTRYPOINT ["/entrypoint.sh"]
 

@@ -11,6 +11,8 @@ CERT=example.crt
 
 SITEDOMAIN=*
 
+PHPINFOPATH=/usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini
+
 sed_escape_lhs() {
     echo "$@" | sed -e 's/[]\/$*.^|[]/\\&/g'
 }
@@ -248,14 +250,14 @@ gen_selfsigned_cert
 config_server_wp
 activate_cache
 
+sed -i "s/^upload_max_filesize\s*=.*/upload_max_filesize=$PHP_UPLOAD_MAX_FILESIZE/" $PHPINFOPATH
+sed -i "s/^post_max_size\s*=.*/post_max_size=$PHP_POST_MAX_SIZE/" $PHPINFOPATH
+sed -i "s/^max_execution_time\s*=.*/max_execution_time=$PHP_MAX_EXECUTION_TIME/" $PHPINFOPATH
+sed -i "s/^memory_limit\s*=.*/memory_limit=$PHP_MEMORY_LIMIT/" $PHPINFOPATH
+
 echo "Starting openlitespeed..."
 
 /usr/local/lsws/bin/lswsctrl start
-# openlitespeed -n
-
-
-cat "$WORDPRESSPATH/wp-config.php"
 
 echo "Tailling. ..."
-
 tail -f /dev/null

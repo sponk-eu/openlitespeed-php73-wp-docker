@@ -21,7 +21,7 @@ RUN rm latest.tar.gz
 RUN wget -q -r --level=0 -nH --cut-dirs=2 --no-parent https://plugins.svn.wordpress.org/litespeed-cache/trunk/ --reject html -P ./wordpress/wp-content/plugins/litespeed-cache/
 RUN chown -R --reference=./autoupdate ./wordpress
 
-#
+# 
 RUN rm -rf /usr/local/lsws/conf/httpd_config.conf /usr/local/lsws/lsphp73/etc/php/7.3/litespeed/php.ini /var/lib/apt/lists/* ./enable_lst_debain_repo.sh /usr/local/lsws/conf/vhosts/Example && apt-get remove --purge -y wget
 
 RUN touch /usr/local/lsws/logs/error.log
@@ -57,7 +57,11 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     SSL_HOSTNAME='webadmin' \
     SSL_EMAIL='.' \
     WORDPRESS_TABLE_PREFIX='wp_' \
-    WORDPRESS_DEBUG="0" 
+    WORDPRESS_DEBUG="0" \
+    PHP_MEMORY_LIMIT="512M" \
+    PHP_MAX_EXECUTION_TIME="1800" \
+    PHP_POST_MAX_SIZE="2048M" \
+    PHP_UPLOAD_MAX_FILESIZE="2048M"
 
 ENTRYPOINT ["/entrypoint.sh"]
 

@@ -70,7 +70,7 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     PHP_UPLOAD_MAX_FILESIZE="2048M" \
     SITEDOMAIN="*" \
     WPPORT="80" \
-    SSLWPPORT="443" \
+    SSLWPPORT="443"
 
 ENTRYPOINT ["/entrypoint.sh"]
 

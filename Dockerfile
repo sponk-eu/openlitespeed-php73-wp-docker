@@ -63,18 +63,19 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     SSL_HOSTNAME='webadmin' \
     SSL_EMAIL='.' \
     WORDPRESS_TABLE_PREFIX='wp_' \
-    WORDPRESS_DEBUG="0" \
-    PHP_MEMORY_LIMIT="512M" \
-    PHP_MAX_EXECUTION_TIME="1800" \
-    PHP_POST_MAX_SIZE="2048M" \
-    PHP_UPLOAD_MAX_FILESIZE="2048M" \
-    DOMAIN_URL="*" \
-    PROTOCOL="https" \
-    WPPORT="80" \
-    SSLWPPORT="443" \
-    OLS_DEBUG_LEVEL="0" \
-    OLS_MAX_REQ_BODY_SIZE="2047M" \
-    OLS_MAX_DYN_RESP_SIZE="2047M"
+    WORDPRESS_DEBUG='false' \
+    WORDPRESS_CACHE='false' \
+    PHP_MEMORY_LIMIT='512M' \
+    PHP_MAX_EXECUTION_TIME='1800' \
+    PHP_POST_MAX_SIZE='2048M' \
+    PHP_UPLOAD_MAX_FILESIZE='2048M' \
+    DOMAIN_URL='*' \
+    PROTOCOL='https' \
+    WPPORT='80' \
+    SSLWPPORT='443' \
+    OLS_DEBUG_LEVEL='0' \
+    OLS_MAX_REQ_BODY_SIZE='2047M' \
+    OLS_MAX_DYN_RESP_SIZE='2047M'
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["tail -f /dev/null"]

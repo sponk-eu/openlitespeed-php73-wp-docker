@@ -49,6 +49,14 @@ function set_config()
 }
 
 
+function set_config_head() 
+{
+    key="$1"
+    value="$2"
+
+    sed -ri "s/((['\"])$key\2\s*,\s*)(['\"]).*\3/\1$value/" "$WORDPRESSPATH/wp-config.php"
+}
+
 function setup_wordpress
 {
     if [ -e "$WORDPRESSPATH/wp-config.php" ] ; then
@@ -99,8 +107,8 @@ function setup_wordpress
     set_config 'DB_USER' "$DB_USERNAME"
     set_config 'DB_PASSWORD' "$DB_PASSWORD"
     set_config 'DB_NAME' "$DB_NAME"
-    set_config 'WORDPRESS_TABLE_PREFIX' "$WORDPRESS_TABLE_PREFIX"
-    set_config 'WORDPRESS_DEBUG' "$WORDPRESS_DEBUG"
+    set_config_head 'WP_DEBUG' "$WORDPRESS_DEBUG"
+    set_config_head 'WP_CACHE' "$WORDPRESS_CACHE"
 
     # sed -e '5,10d;12d' "$WORDPRESSPATH/wp-config.php"
 

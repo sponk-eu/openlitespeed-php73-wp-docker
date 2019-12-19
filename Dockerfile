@@ -78,7 +78,7 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     OLS_MAX_DYN_RESP_SIZE='2047M'
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["tail -f /dev/null"]
+CMD ["tail -f /dev/stdout | sed 's/^/[LOG: ]/' & tail -f /dev/stderr | sed 's/^/[ERROR: ]/'"]
 
 # [supervisord]
 # nodaemon=true

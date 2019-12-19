@@ -241,9 +241,24 @@ END
             cat > $VHOSTCONF <<END
       
 docRoot                   \$VH_ROOT/
+
 index  {
   useServer               0
   indexFiles              index.php
+}
+
+errorlog $SERVER_ROOT/logs/error.log {
+    useServer 1
+    logLevel DEBUG
+    rollingSize 10M
+}
+
+accesslog $SERVER_ROOT/logs/access.log {
+    logFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-agent}i\"
+    useServer 0
+    rollingSize 10M
+    keepDays 30
+    compressArchive 0
 }
 
 context / {

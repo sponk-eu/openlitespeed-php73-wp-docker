@@ -75,7 +75,8 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     SSLWPPORT='443' \
     OLS_DEBUG_LEVEL='0' \
     OLS_MAX_REQ_BODY_SIZE='2047M' \
-    OLS_MAX_DYN_RESP_SIZE='2047M'
+    OLS_MAX_DYN_RESP_SIZE='2047M' \
+    CORS_HEADER=''
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["tail -f /dev/stdout | sed 's/^/[LOG: ]/' & tail -f /dev/stderr | sed 's/^/[ERROR: ]/'"]

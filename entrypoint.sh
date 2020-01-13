@@ -266,6 +266,7 @@ context / {
   location                \$VH_ROOT
   allowBrowse             1
   indexFiles              index.php
+  extraHeaders            $EXTRA_HEADER
 
   rewrite  {
     enable                1

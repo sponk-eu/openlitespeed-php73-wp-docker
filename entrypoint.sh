@@ -203,6 +203,7 @@ function config_server_wp
 
         cat $SERVER_ROOT/conf/httpd_config.conf | grep "virtualhost wordpress" >/dev/null
         if [ $? != 0 ] ; then
+            sed -i -e "s/debugLevel/debugLevel $LOG_DEBUG\n#debugLevel/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/adminEmails/adminEmails $SERVER_EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/debugLevel/debugLevel $OLS_DEBUG_LEVEL\n#debugLevel/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/maxReqBodySize/maxReqBodySize $OLS_MAX_REQ_BODY_SIZE\n#maxReqBodySize/" "$SERVER_ROOT/conf/httpd_config.conf"

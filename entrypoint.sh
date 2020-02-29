@@ -220,6 +220,7 @@ virtualhost wordpress {
   enableScript            1
   restrained              0
   setUIDMode              2
+  extraHeaders            $EXTRA_HEADER
 }
 
 listener wordpress {

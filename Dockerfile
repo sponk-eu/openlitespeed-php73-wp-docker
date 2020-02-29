@@ -74,7 +74,7 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     OLS_DEBUG_LEVEL='0' \
     OLS_MAX_REQ_BODY_SIZE='2047M' \
     OLS_MAX_DYN_RESP_SIZE='2047M' \
-    CORS_HEADER='' \
+    EXTRA_HEADER='Access-Control-Allow-Origin *' \
     LOG_DEBUG='0'
 
 ENTRYPOINT ["/entrypoint.sh"]

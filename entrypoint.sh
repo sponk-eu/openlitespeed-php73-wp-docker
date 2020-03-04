@@ -167,33 +167,17 @@ function set_ols_password
 function gen_selfsigned_cert
 {
 
+    echo "Generating selfsigned cert"
 
-# Create the certificate signing request
-    openssl req -new -passin pass:password -passout pass:password -out $CSR <<EOF
-${SSL_COUNTRY}
-${SSL_STATE}
-${SSL_LOCALITY}
-${SSL_ORG}
-${SSL_ORGUNIT}
-${SSL_HOSTNAME}
-${SSL_EMAIL}
-.
-.
-EOF
+    openssl req -new -nodes -newkey rsa:4096 -days 1000 -x509 -subj "/emailAddress=${SSL_EMAIL}/C=${SSL_COUNTRY}/ST=${SSL_STATE}/L=${SSL_LOCALITY}/O=${SSL_ORG}/OU=${SSL_ORGUNIT}/CN=${SSL_HOSTNAME}" -keyout ${KEY} -out ${CERT}
     echo ""
-
-    [ -f ${CSR} ] && openssl req -text -noout -in ${CSR}
-    echo ""
-
-# Create the Key
-    openssl rsa -in privkey.pem -passin pass:password -passout pass:password -out ${KEY}
-# Create the Certificate
-    openssl x509 -in ${CSR} -out ${CERT} -req -signkey ${KEY} -days 1000
 
     mv ${KEY}   $SERVER_ROOT/conf/$KEY
     mv ${CERT}  $SERVER_ROOT/conf/$CERT
     chmod 0600 $SERVER_ROOT/conf/$KEY
     chmod 0600 $SERVER_ROOT/conf/$CERT
+    echo "Finished selfsigned"
+
 }
 
 
@@ -220,7 +204,6 @@ virtualhost wordpress {
   enableScript            1
   restrained              0
   setUIDMode              2
-  extraHeaders            $EXTRA_HEADER
 }
 
 listener wordpress {
@@ -235,6 +218,10 @@ listener wordpressssl {
   map                     wordpress $DOMAIN_URL
   keyFile                 $SERVER_ROOT/conf/$KEY
   certFile                $SERVER_ROOT/conf/$CERT
+  sslProtocol             30
+  enableSpdy              12
+  enableQuic              1
+
 }
 
 

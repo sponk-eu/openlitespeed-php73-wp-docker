@@ -65,6 +65,7 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     WORDPRESS_CACHE='false' \
     PHP_MEMORY_LIMIT='512M' \
     PHP_MAX_EXECUTION_TIME='1800' \
+    PHP_MAX_INPUT_TIME='60' \
     PHP_POST_MAX_SIZE='2048M' \
     PHP_UPLOAD_MAX_FILESIZE='2048M' \
     DOMAIN_URL='*' \

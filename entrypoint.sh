@@ -301,6 +301,7 @@ activate_cache
 sed -i "s/^upload_max_filesize\s*=.*/upload_max_filesize=$PHP_UPLOAD_MAX_FILESIZE/" $PHPINFOPATH
 sed -i "s/^post_max_size\s*=.*/post_max_size=$PHP_POST_MAX_SIZE/" $PHPINFOPATH
 sed -i "s/^max_execution_time\s*=.*/max_execution_time=$PHP_MAX_EXECUTION_TIME/" $PHPINFOPATH
+sed -i "s/^max_input_time\s*=.*/max_input_time=$PHP_MAX_INPUT_TIME/" $PHPINFOPATH
 sed -i "s/^memory_limit\s*=.*/memory_limit=$PHP_MEMORY_LIMIT/" $PHPINFOPATH
 
 echo "Starting openlitespeed..."

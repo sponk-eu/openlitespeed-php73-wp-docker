@@ -75,6 +75,8 @@ ENV PATH=/usr/local/lsws/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/
     OLS_DEBUG_LEVEL='0' \
     OLS_MAX_REQ_BODY_SIZE='2047M' \
     OLS_MAX_DYN_RESP_SIZE='2047M' \
+    OLS_PROC_HARD_LIMIT='500' \
+    OLS_PROC_SOFT_LIMIT='500' \
     EXTRA_HEADER='Access-Control-Allow-Origin *' \
     LOG_DEBUG='0'
 

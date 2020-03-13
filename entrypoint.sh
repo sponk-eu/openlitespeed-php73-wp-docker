@@ -192,6 +192,9 @@ function config_server_wp
             sed -i -e "s/debugLevel/debugLevel $OLS_DEBUG_LEVEL\n#debugLevel/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/maxReqBodySize/maxReqBodySize $OLS_MAX_REQ_BODY_SIZE\n#maxReqBodySize/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/maxDynRespSize/maxDynRespSize $OLS_MAX_DYN_RESP_SIZE\n#maxDynRespSize/" "$SERVER_ROOT/conf/httpd_config.conf"
+            sed -i -e "s/initTimeout/initTimeout $OLS_INIT_TIMEOUT\n#initTimeout/" "$SERVER_ROOT/conf/httpd_config.conf"
+            sed -i -e "s/procHardLimit/procHardLimit $OLS_PROC_HARD_LIMIT\n#procHardLimit/" "$SERVER_ROOT/conf/httpd_config.conf"
+            sed -i -e "s/procSoftLimit/procSoftLimit $OLS_PROC_SOFT_LIMIT\n#procSoftLimit/" "$SERVER_ROOT/conf/httpd_config.conf"
 
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/wordpress/vhconf.conf
 
